@@ -1,39 +1,27 @@
-#Solution
-#from sys import exc_info
+# Working with Directories
+from pathlib import Path
 
-#from utils import find_max
+# Absolute path - to refer a Directory in a computer
+# c:\Program Files\Microsoft
+# /usr/local/bin
 
-#numbers = [10, 3, 6, 2]
-## max = find_max(numbers)
-#print(max(numbers))
+# Relative path - to refer a File inside our current Directory
+# path = Path("ecommerce")
+# print(path.exists()) #We check if the path exists
+# path = Path("emails")
+# print(path.mkdir()) #We create a new Directory
+# print(path.rmdir()) #We delete a new Directory
 
-#Packages
-#from ecommerce import shipping
-#Other way to import multiple functions: from ecommerce.shipping import cal_shipping, cal_tax
+# path = Path()
+# print(path.glob('*')) # We can look at all the Directories in this project
+# print(path.glob('*.*')) # We can look at all the Files in this project
 
-#shipping.cal_shipping()
+# Search for Files only:
+path = Path()
+for file in path.glob('*.py'):
+    print(file)
 
-#Generating Random Values
-import random
-
-for i in range(3):
-    print(random.random())
-
-for i in range(3):
-    print(random.randint(10, 20))
-
-members = ['John', 'Mary', 'Bob', 'Camila']
-leader = random.choice(members)
-print(leader)
-
-#Exercise
-
-import random
-class Dice:
-    def roll(self):
-       first =  random.randint(1, 6)
-       second = random.randint(1, 6)
-       return (first, second) #In python, we can also write without parenthesis and it takes it as a Tuple, like this: ""return first, second"
-
-dice = Dice()
-print(dice.roll())
+# Search for Files and Directories:
+path = Path()
+for file in path.glob('*'):
+    print(file)
