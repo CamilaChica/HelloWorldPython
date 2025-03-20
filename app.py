@@ -1,27 +1,39 @@
-# Working with Directories
-from pathlib import Path
+import openpyxl as xl
+from openpyxl.chart import BarChart, Reference
 
-# Absolute path - to refer a Directory in a computer
-# c:\Program Files\Microsoft
-# /usr/local/bin
+def process_workbook(filename):
 
-# Relative path - to refer a File inside our current Directory
-# path = Path("ecommerce")
-# print(path.exists()) #We check if the path exists
-# path = Path("emails")
-# print(path.mkdir()) #We create a new Directory
-# print(path.rmdir()) #We delete a new Directory
+    wb = xl.load_workbook(filename)
+    sheet = wb['Sheet1']
+    # cell = sheet['a1'] #cell = sheet.cell(1, 1)
+    # print(cell.value)
 
-# path = Path()
-# print(path.glob('*')) # We can look at all the Directories in this project
-# print(path.glob('*.*')) # We can look at all the Files in this project
+    # for row in range(1, sheet.max_row + 1):
+    #   print(row)
 
-# Search for Files only:
-path = Path()
-for file in path.glob('*.py'):
-    print(file)
+    #for row in range(, sheet.max_row + 1):
+    #    cell = sheet.cell(row, 3)
+    #    print(cell.value)
 
-# Search for Files and Directories:
-path = Path()
-for file in path.glob('*'):
-    print(file)
+
+    # Update Spreadsheet:
+    for row in range(, sheet.max_row + 1):
+        cell = sheet.cell(row, 3)
+        corrected_price = cell.value * 0.9
+        corrected_price_cell = sheet.cell(row, 4)
+        corrected_price_cell.value = corrected_price
+
+    values = Reference(sheet,
+              min_row=2,
+              max_row=sheet.max_row,
+              min_col=4,
+              max_col=4)
+
+    # Create a Chart
+    chart = Barchart()
+    chart.add_data(values)
+    sheet.add_chart(chart,'e2')
+
+    # Save changes in our spreadsheet:
+    wb.save(filename)
+
